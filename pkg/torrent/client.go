@@ -398,6 +398,48 @@ func (c Client) RemoveCategory(categories []string) error {
 	return nil
 }
 
+func (c Client) AddTags(hashes []string, tags []string) error {
+	params := url.Values{}
+	params.Add("hashes", strings.Join(hashes, "|"))
+	params.Add("tags", strings.Join(tags, ","))
+	if err := pkg.PostWithContentType(c.Client, c.BaseUrl+"/addTags",
+		strings.NewReader(params.Encode()), "application/x-www-form-urlencoded"); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c Client) RemoveTags(hashes []string, tags []string) error {
+	params := url.Values{}
+	params.Add("hashes", strings.Join(hashes, "|"))
+	params.Add("tags", strings.Join(tags, ","))
+	if err := pkg.PostWithContentType(c.Client, c.BaseUrl+"/removeTags",
+		strings.NewReader(params.Encode()), "application/x-www-form-urlencoded"); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c Client) CreateTags(tags []string) error {
+	params := url.Values{}
+	params.Add("tags", strings.Join(tags, ","))
+	if err := pkg.PostWithContentType(c.Client, c.BaseUrl+"/createTags",
+		strings.NewReader(params.Encode()), "application/x-www-form-urlencoded"); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c Client) DeleteTags(tags []string) error {
+	params := url.Values{}
+	params.Add("tags", strings.Join(tags, ","))
+	if err := pkg.PostWithContentType(c.Client, c.BaseUrl+"/deleteTags",
+		strings.NewReader(params.Encode()), "application/x-www-form-urlencoded"); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (c Client) SetAutomaticManagement(hashes []string, enable bool) error {
 	params := url.Values{}
 	params.Add("hashes", strings.Join(hashes, "|"))

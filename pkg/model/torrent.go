@@ -35,6 +35,8 @@ type Torrent struct {
 	FLPiecePrio bool `json:"f_l_piece_prio"`
 	// Category of the torrent
 	Category string `json:"category"`
+	// List of the torrent tags, comma seperated
+	Tags string `json:"tags"`
 	// True if super seeding is enabled
 	SuperSeeding bool `json:"super_seeding"`
 	// True if force start is enabled for this torrent
